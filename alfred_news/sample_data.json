@@ -1,0 +1,22 @@
+{
+  "news": [
+    [
+      "CNN",
+      "http://rss.cnn.com/rss/edition.rss"
+    ],
+    [
+      "BBC",
+      "bbc.com"
+    ]
+  ],
+  "social": [
+    [
+      "facebook",
+      "facebook.com"
+    ],
+    [
+      "twitter",
+      "twitter.com"
+    ]
+  ]
+}

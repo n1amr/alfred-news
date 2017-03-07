@@ -14,3 +14,4 @@ class AlfredNews(ABaseModule):
 
         self.add_component(h1)
         self.add_component(h2)
+

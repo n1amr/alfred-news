@@ -48,7 +48,7 @@ class Category(DBModelBase):
 
 
 def create_new_database():
-    with open(os.path.join(ROOT_PATH, 'sample_data.json'), 'r') as f:
+    with open(os.path.join(ROOT_PATH, 'resources', 'sample_data.json'), 'r') as f:
         sample_data = json.loads(f.read())
 
     session = make_session()

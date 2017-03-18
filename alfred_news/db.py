@@ -11,7 +11,7 @@ ROOT_PATH = os.path.abspath(os.path.dirname(__file__))
 
 
 def init_db():
-    filepath = os.path.join(ROOT_PATH, 'news.sqlite')
+    filepath = os.path.join(ROOT_PATH, '../data/news.sqlite')
     engine = create_engine('sqlite:///{}'.format(filepath))
     DBModelBase.metadata.bind = engine
 

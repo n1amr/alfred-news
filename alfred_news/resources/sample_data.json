@@ -6,17 +6,13 @@
     ],
     [
       "BBC",
-      "bbc.com"
+      "http://feeds.bbci.co.uk/news/rss.xml?edition=int"
     ]
   ],
   "social": [
     [
-      "facebook",
-      "facebook.com"
-    ],
-    [
-      "twitter",
-      "twitter.com"
+      "nixCraft",
+      "http://feeds.cyberciti.biz/Nixcraft-LinuxFreebsdSolarisTipsTricks"
     ]
   ]
 }

@@ -1,15 +1,16 @@
 import feedparser
-from alfred.modules.api.a_base_model import AbstractABaseModel
+from alfred.modules.api.a_base_model import ABaseModel
 from alfred.modules.api.a_base_module import ABaseModule
 from alfred.modules.api.a_heading import AHeading
 
 from .db import make_session
 from .models import Source, create_new_database
 
-create_new_database()
+
+# create_new_database()
 
 
-class BaseModel(AbstractABaseModel):
+class BaseModel(ABaseModel):
     pass
 
 
@@ -47,6 +48,10 @@ def fetch_articles():
     for source in all_sources:
         print(f'Getting feeds from {source.url}')
         feed = feedparser.parse(source.url)
+        if 'bozo_exception' in feed:
+            print(f'ERROR: Exception while fetching from {source.url}')
+            continue
+
         for entry in feed['entries']:
             title = entry.get('title', '')
             body = entry.get('summary', '')

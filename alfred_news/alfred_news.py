@@ -1,7 +1,8 @@
 import feedparser
 from alfred.modules.api.a_base_model import ABaseModel
 from alfred.modules.api.a_base_module import ABaseModule
-from alfred.modules.api.a_heading import AHeading
+from alfred.modules.api.view_components.a_heading import AHeading
+import alfred.modules.api.a_module_globals as amg
 
 from .db import make_session
 from .models import Source, create_new_database
@@ -26,7 +27,9 @@ class AlfredNews(ABaseModule):
         pass
 
     def construct_view(self):
-        BaseModel.connect(self.database_path)
+        import dataset
+        BaseModel.database = dataset.connect(
+            'sqlite:///{path}'.format(path=amg.module_db_path))
 
         h1 = AHeading(1, "News module")
         self.add_component(h1)

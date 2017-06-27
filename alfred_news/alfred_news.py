@@ -20,6 +20,7 @@ from alfred.modules.api.view_components.a_badges_collapsibles import ABadgesColl
 import os
 from .db import ROOT_PATH
 
+# TODO should be called if no databes exists
 # create_new_database()
 
 
@@ -46,7 +47,6 @@ class AlfredNews(ABaseModule):
         import dataset
         BaseModel.database = dataset.connect(
             'sqlite:///{path}'.format(path=amg.module_db_path))
-
         h1 = AHeading(1, "News module")
         badges_js = AScript(src= ROOT_PATH + "/resources/a_badges_collapsibles.js")
         jquery_source = AScript(src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js")

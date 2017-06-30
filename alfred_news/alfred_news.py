@@ -81,6 +81,7 @@ class AlfredNews(ABaseModule):
             news_list.append({'header': {'value': html_title},
                               'body': {'value': html_div}})
 
+
         self.add_component(ACollapsible(attributes = news_list))
         self.add_component(badges_js)
 

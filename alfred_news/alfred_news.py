@@ -66,8 +66,9 @@ class AlfredNews(ABaseModule):
             html_title.attrs['style'] = "color:black; display: inline-block;"
             html_title.attrs['class'] = "collapsible-header-value"
 
-            kwargs = {"style": "display:block;max-width:350px;max-height:350px;width: auto;height: auto;"}
-            html_image = AImage(source = article.image ,**kwargs)
+            kwargs = {
+                "style": "display:block;max-width:350px;max-height:350px;width: auto;height: auto;"}
+            html_image = AImage(source=article.image, **kwargs)
             html_summary = AParagraph(article.summary)
             html_date = AParagraph(article.date)
             html_link = AHref(url=article.url, link="Read")
@@ -81,7 +82,7 @@ class AlfredNews(ABaseModule):
             news_list.append({'header': {'value': html_title},
                               'body': {'value': html_div}})
 
-        self.add_component(ACollapsible(attributes = news_list))
+        self.add_component(ACollapsible(attributes=news_list))
         self.add_component(badges_js)
 
 

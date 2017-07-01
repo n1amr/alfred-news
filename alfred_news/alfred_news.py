@@ -90,10 +90,11 @@ def fetch_articles():
     session = make_session()
     all_sources = session.query(Source).all()
     for source in all_sources:
-        print(f'Getting feeds from {source.url}')
+        print('Getting feeds from {url}'.format(url=source.url))
         feed = feedparser.parse(source.url)
         if 'bozo_exception' in feed:
-            print(f'ERROR: Exception while fetching from {source.url}')
+            print(
+                'ERROR: Exception while fetching from {url}'.format(source.url))
             continue
 
         for entry in feed['entries']:
@@ -111,5 +112,5 @@ def fetch_articles():
 
             if Article.find_by(title=title) is None:
                 article = Article(title, summary, date, url, image)
-                print(f'Saving article "{title}"')
+                print('Saving article "{title}"'.format(title=title))
                 article.save()

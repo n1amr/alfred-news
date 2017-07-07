@@ -1,61 +1,32 @@
-import json
-import os
-
-from sqlalchemy import Column, String, Integer
-from sqlalchemy.orm import relationship
-from sqlalchemy.sql.schema import ForeignKey
-
-from .db import DBModelBase, make_session, ROOT_PATH
+from alfred.modules.api.a_base_model import ABaseModel
 
 
-class Source(DBModelBase):
-    __tablename__ = 'source'
-    id = Column(Integer, primary_key=True)
-    name = Column(String(256), nullable=False)
-    url = Column(String(256), nullable=False)
-    category_id = Column(Integer, ForeignKey('category.id'))
+class Article(ABaseModel):
+    def __init__(self, title, summary, date, url, image):
+        super().__init__()
+        self.title = title
+        self.summary = summary
+        self.date = date
+        self.url = url
+        self.image = image
 
-    def __init__(self, name, url, category=None):
+
+class Source(ABaseModel):
+    def __init__(self, name, url, category_id):
+        super().__init__()
         self.name = name
         self.url = url
-        self.category = category
-
-    @staticmethod
-    def create(name, url):
-        s = Source(name, url)
-        session = make_session()
-        session.add(s)
-        session.commit()
-        session.close()
+        self.category_id = category_id
 
 
-class Category(DBModelBase):
-    __tablename__ = 'category'
-    id = Column(Integer, primary_key=True)
-    name = Column(String(256), nullable=False)
-    sources = relationship(Source, backref='category')
-
+class Category(ABaseModel):
     def __init__(self, name):
+        super().__init__()
         self.name = name
 
-    @staticmethod
-    def create(name):
-        c = Category(name)
-        session = make_session()
-        session.add(c)
-        session.commit()
-        session.close()
-
-
-def create_new_database():
-    with open(os.path.join(ROOT_PATH, 'resources', 'sample_data.json'), 'r') as f:
-        sample_data = json.loads(f.read())
-
-    session = make_session()
-    for category, sources in sample_data.items():
-        category_obj = Category(name=category)
-        for source_name, source_url in sources:
-            source_obj = Source(source_name, source_url, category_obj)
-            session.add(source_obj)
-        session.add(category_obj)
-    session.commit()
+    def sources(self):
+        lst = []
+        for source in Source.all():
+            if str(source.category_id) == str(self.id):
+                lst.append(source)
+        return lst

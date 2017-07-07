@@ -34,15 +34,11 @@ class AlfredNews(ABaseModule):
     def construct_view(self):
         self.initialize()
 
-        h1 = AHeading(1, "News module")
         badges_js = AScript(
             src=ROOT_PATH + '/resources/a_badges_collapsibles.js')
         jquery_source = AScript(
             src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js")
-        line_divider = ADivider()
 
-        self.add_component(h1)
-        self.add_component(line_divider)
         self.add_component(jquery_source)
 
         try:

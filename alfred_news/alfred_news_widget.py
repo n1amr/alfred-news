@@ -6,14 +6,6 @@ import feedparser
 
 
 class AlfredNewsWidget(ABaseWidget):
-    def __init__(self):
-        ABaseWidget.__init__(self)
-        self.title = ''
-        self.summary = ''
-        self.date =  ''
-        self.url = ''
-        self.image = ''
-
     def callback(self):
         feed = feedparser.parse("http://rss.cnn.com/rss/edition.rss")
         for entry in feed['entries']:
@@ -32,6 +24,6 @@ class AlfredNewsWidget(ABaseWidget):
         self.title = self.title
         self.content.append(AParagraph(self.summary))
         self.content.append(AParagraph(self.date))
-        self.content.append(AParagraph(AHref(url = self.date, link = 'Read')))
+        # self.content.append(AParagraph(AHref(url = self.date, link = 'Read')))
         self.image_url = self.image
-        self.title_on_image = True
+        self.title_on_image = False
